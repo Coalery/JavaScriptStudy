@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+    </head>
+    <body>
+        <script>
+            function printArray(arr) {
+                for(var i=0; i<arr.length; i++) {
+                    document.write(arr[i] + " ");
+                }
+                document.write("<br/>");
+            }
+
+            var li = ['a', 'b', 'c', 'd', 'e'];
+            printArray(li);
+
+            li.push('f');
+            printArray(li);
+
+            li.concat(['g', 'h']);
+            printArray(li);
+
+            li.unshift('z');
+            printArray(li);
+
+            li.splice(2, 0, 'B');
+            printArray(li);
+
+            li.splice(2, 2, 'C');
+            printArray(li);
+        </script>
+    </body>
+</html>
