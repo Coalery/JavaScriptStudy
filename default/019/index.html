@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <script>
+            var i = 5;
+
+            function a() {
+                var i = 10;
+                b();
+            }
+
+            function b() {
+                console.log(i);
+            }
+
+            a();
+        </script>
+    </body>
+</html>
