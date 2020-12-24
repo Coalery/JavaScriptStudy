@@ -5,4 +5,4 @@ class Car {
     }
 }
 
-module.exports = Car;
+exports.Car = Car;
