@@ -1,7 +1,6 @@
 const express = require('express');
 let app = express();
 
-app.locals.pretty = true;
 app.set('views', './views');
 app.set('view engine', 'pug');
 
