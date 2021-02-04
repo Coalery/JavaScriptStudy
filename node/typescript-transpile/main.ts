@@ -1,16 +1,49 @@
-interface Point {
-  readonly x: number;
-  readonly y: number;
-  readonly z?: number;
+interface ClockConstructor {
+  new (hour: number, minute: number);
 }
 
-function getPoint(p: Point): string {
-  if (p.z) return `X : ${p.x}, Y : ${p.y}, Z : ${p.z}`;
-  return `X : ${p.x}, Y : ${p.y}`;
+interface ClockInterface {
+  tick(): void;
 }
 
-let point1 = { x: 2, y: 3, z: 4 };
-let point2 = { x: 4, y: 7 };
+function createClock(
+  ctor: ClockConstructor,
+  hour: number,
+  minute: number
+): ClockInterface {
+  return new ctor(hour, minute);
+}
 
-console.log(getPoint(point1));
-console.log(getPoint(point2));
+class DigitalClock implements ClockInterface {
+  private hour: number;
+  private minute: number;
+
+  constructor(hour: number, minute: number) {
+    this.hour = hour;
+    this.minute = minute;
+  }
+
+  tick() {
+    console.log(`Beep Beep! Current Time is ${this.hour}:${this.minute}`);
+  }
+}
+
+class AnalogClock implements ClockInterface {
+  private hour: number;
+  private minute: number;
+
+  constructor(hour: number, minute: number) {
+    this.hour = hour;
+    this.minute = minute;
+  }
+
+  tick() {
+    console.log(`Tick Tock! Current Time is ${this.hour}:${this.minute}`);
+  }
+}
+
+let digitalClock = createClock(DigitalClock, 12, 13) as DigitalClock;
+let analogClock = createClock(AnalogClock, 15, 37) as AnalogClock;
+
+digitalClock.tick();
+analogClock.tick();
