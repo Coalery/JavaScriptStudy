@@ -1,19 +1,18 @@
-import "@babel/polyfill";
-import { pi, power, Foo } from "./lib";
+let Counter = (function () {
+  let num = 0;
 
-console.log(pi);
-console.log(power(pi, pi));
+  return {
+    increase() {
+      return ++num;
+    },
+    decrease() {
+      return --num;
+    },
+  };
+})();
 
-const f = new Foo();
-console.log(f.foo());
-console.log(f.bar());
-
-console.log(
-  new Promise((resolve, reject) => {
-    setTimeout(() => resolve(1), 100);
-  })
-);
-
-console.log(Object.assign({}, { x: 1 }, { x: 2 }));
-
-console.log(Array.from([1, 2, 3], (v) => v + v));
+console.log(Counter.num); // undefined
+console.log(Counter.increase());
+console.log(Counter.increase());
+console.log(Counter.decrease());
+console.log(Counter.decrease());
