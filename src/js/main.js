@@ -1,18 +1,44 @@
-let Counter = (function () {
-  let num = 0;
+const person = {};
 
-  return {
-    increase() {
-      return ++num;
-    },
-    decrease() {
-      return --num;
-    },
-  };
-})();
+Object.defineProperty(person, "firstName", {
+  value: "Ungmo",
+  writable: true,
+  enumerable: true,
+  configurable: true,
+});
 
-console.log(Counter.num); // undefined
-console.log(Counter.increase());
-console.log(Counter.increase());
-console.log(Counter.decrease());
-console.log(Counter.decrease());
+Object.defineProperty(person, "lastName", {
+  value: "Lee",
+});
+
+let descriptor = Object.getOwnPropertyDescriptor(person, "firstName");
+console.log("firstName", descriptor);
+
+descriptor = Object.getOwnPropertyDescriptor(person, "lastName");
+console.log("lastName", descriptor);
+
+console.log(Object.keys(person));
+
+person.lastName = "Kim";
+
+delete person.lastName;
+
+descriptor = Object.getOwnPropertyDescriptor(person, "lastName");
+console.log("lastName", descriptor);
+
+Object.defineProperty(person, "fullName", {
+  get() {
+    return `${this.firstName} ${this.lastName}`;
+  },
+  set(name) {
+    [this.firstName, this.lastName] = name.split(" ");
+  },
+  enumerable: true,
+  configurable: true,
+});
+
+descriptor = Object.getOwnPropertyDescriptor(person, "fullName");
+console.log("fullName", descriptor);
+
+person.fullName = "Heegun Lee";
+console.log(person);
