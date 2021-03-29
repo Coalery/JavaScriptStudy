@@ -1,44 +1,41 @@
-const person = {};
+function deepFreeze(obj) {
+  if (obj && typeof obj === "object" && !Object.isFrozen(obj)) {
+    Object.freeze(obj);
+    Object.keys(obj).forEach((key) => deepFreeze(obj[key]));
+  }
+  return obj;
+}
 
-Object.defineProperty(person, "firstName", {
-  value: "Ungmo",
-  writable: true,
-  enumerable: true,
-  configurable: true,
-});
+const option = {
+  title: "Size",
+  subOptions: [
+    {
+      name: "S",
+      surcharge: 0,
+    },
+    {
+      name: "M",
+      surcharge: 1000,
+    },
+    {
+      name: "L",
+      surcharge: 2000,
+    },
+    {
+      name: "XL",
+      surcharge: 3000,
+    },
+    {
+      name: "XXL",
+      surcharge: 4000,
+    },
+  ],
+};
 
-Object.defineProperty(person, "lastName", {
-  value: "Lee",
-});
+deepFreeze(option);
 
-let descriptor = Object.getOwnPropertyDescriptor(person, "firstName");
-console.log("firstName", descriptor);
+console.log(option);
 
-descriptor = Object.getOwnPropertyDescriptor(person, "lastName");
-console.log("lastName", descriptor);
+option.subOptions[4].surcharge = 5000;
 
-console.log(Object.keys(person));
-
-person.lastName = "Kim";
-
-delete person.lastName;
-
-descriptor = Object.getOwnPropertyDescriptor(person, "lastName");
-console.log("lastName", descriptor);
-
-Object.defineProperty(person, "fullName", {
-  get() {
-    return `${this.firstName} ${this.lastName}`;
-  },
-  set(name) {
-    [this.firstName, this.lastName] = name.split(" ");
-  },
-  enumerable: true,
-  configurable: true,
-});
-
-descriptor = Object.getOwnPropertyDescriptor(person, "fullName");
-console.log("fullName", descriptor);
-
-person.fullName = "Heegun Lee";
-console.log(person);
+console.log(option);
