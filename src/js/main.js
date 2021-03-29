@@ -1,41 +1,16 @@
-function deepFreeze(obj) {
-  if (obj && typeof obj === "object" && !Object.isFrozen(obj)) {
-    Object.freeze(obj);
-    Object.keys(obj).forEach((key) => deepFreeze(obj[key]));
+function Circle(radius) {
+  if (new.target) {
+    this.radius = radius;
+    this.getDiameter = function () {
+      return 2 * this.radius;
+    };
+  } else {
+    return new Circle(radius);
   }
-  return obj;
 }
 
-const option = {
-  title: "Size",
-  subOptions: [
-    {
-      name: "S",
-      surcharge: 0,
-    },
-    {
-      name: "M",
-      surcharge: 1000,
-    },
-    {
-      name: "L",
-      surcharge: 2000,
-    },
-    {
-      name: "XL",
-      surcharge: 3000,
-    },
-    {
-      name: "XXL",
-      surcharge: 4000,
-    },
-  ],
-};
+let circle1 = new Circle(5.0);
+console.log(circle1);
 
-deepFreeze(option);
-
-console.log(option);
-
-option.subOptions[4].surcharge = 5000;
-
-console.log(option);
+let circle2 = Circle(5.0);
+console.log(circle2);
