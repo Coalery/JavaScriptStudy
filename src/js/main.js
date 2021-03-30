@@ -1,16 +1,13 @@
 function Circle(radius) {
-  if (new.target) {
-    this.radius = radius;
-    this.getDiameter = function () {
-      return 2 * this.radius;
-    };
-  } else {
-    return new Circle(radius);
-  }
+  this.radius = radius;
 }
 
-let circle1 = new Circle(5.0);
-console.log(circle1);
+Circle.prototype.getArea = function () {
+  return Math.PI * this.radius ** 2;
+};
 
-let circle2 = Circle(5.0);
-console.log(circle2);
+const circle1 = new Circle(1);
+
+console.log(Object.getPrototypeOf(circle1) === Circle.prototype);
+console.log(circle1.constructor === Circle);
+console.log(Circle.prototype.constructor === Circle);
