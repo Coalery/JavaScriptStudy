@@ -1,14 +1,21 @@
-function Circle(radius) {
-  this.radius = radius;
-}
+const Person = (function () {
+  function Person(name) {
+    this.name = name;
+  }
 
-Circle.prototype.getArea = function () {
-  return Math.PI * this.radius ** 2;
-};
+  Person.prototype = {
+    constructor: Person,
+    sayHello() {
+      console.log(`Hi! My name is ${this.name}.`);
+    },
+  };
 
-const circle1 = new Circle(1);
+  return Person;
+})();
 
-console.log(Object.getPrototypeOf(circle1) === Circle.prototype);
-console.log(circle1.constructor === Circle);
-console.log(Circle.prototype.constructor === Circle);
-console.log(new new new circle1.constructor(5).constructor(10).constructor(15));
+const me = new Person("Lee");
+
+console.log(me.constructor === Person);
+console.log(me.constructor === Object);
+console.log(me instanceof Person);
+console.log(me instanceof Object);
