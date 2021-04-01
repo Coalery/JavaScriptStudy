@@ -1,19 +1,6 @@
-function Person(name) {
-  this.name = name;
-}
-
-Person.prototype.sayHello = function () {
-  console.log(`Hi! My name is ${this.name}.`);
-};
-
-Person.staticProp = "static prop";
-
-Person.staticMethod = function () {
-  console.log("staticMethod");
-};
-
-const me = new Person("Lee");
-
-Person.staticMethod();
-// me.staticMethod();
-// TypeError: me.staicMethod is not a function
+(function (a) {
+  "use strict";
+  a = 2;
+  console.log(arguments);
+  console.log(a);
+})(1);
