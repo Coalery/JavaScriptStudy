@@ -1,11 +1,24 @@
-function outer() {
-  let x = 3;
-  function inner(z) {
-    console.log(x + z);
-  }
-  return inner;
+function makeCounter(predicate) {
+  let counter = 0;
+
+  return function () {
+    counter = predicate(counter);
+    return counter;
+  };
 }
 
-let inner = outer();
+function increase(n) {
+  return ++n;
+}
 
-inner(5);
+function decrease(n) {
+  return --n;
+}
+
+const increaser = makeCounter(increase);
+console.log(increaser());
+console.log(increaser());
+
+const decreaser = makeCounter(decrease);
+console.log(decreaser());
+console.log(decreaser());
