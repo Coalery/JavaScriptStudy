@@ -1,10 +1,11 @@
-const person = {
-  name: "Lee",
-  foo(callback) {
-    setTimeout(callback.bind(this), 100);
-  },
-};
+function outer() {
+  let x = 3;
+  function inner(z) {
+    console.log(x + z);
+  }
+  return inner;
+}
 
-person.foo(function () {
-  console.log(`Hi! my name is ${this.name}.`);
-});
+let inner = outer();
+
+inner(5);
