@@ -1,24 +1,11 @@
-function makeCounter(predicate) {
-  let counter = 0;
+const funcs = [];
 
-  return function () {
-    counter = predicate(counter);
-    return counter;
+for (let i = 0; i < 3; i++) {
+  funcs[i] = function () {
+    return i;
   };
 }
 
-function increase(n) {
-  return ++n;
+for (let i = 0; i < funcs.length; i++) {
+  console.log(funcs[i]());
 }
-
-function decrease(n) {
-  return --n;
-}
-
-const increaser = makeCounter(increase);
-console.log(increaser());
-console.log(increaser());
-
-const decreaser = makeCounter(decrease);
-console.log(decreaser());
-console.log(decreaser());
