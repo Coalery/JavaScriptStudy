@@ -1,11 +1,12 @@
-const funcs = [];
+class Person {
+  constructor(name) {
+    this.name = name;
+  }
 
-for (let i = 0; i < 3; i++) {
-  funcs[i] = function () {
-    return i;
-  };
+  static sayHi() {
+    console.log("Hi!");
+  }
 }
 
-for (let i = 0; i < funcs.length; i++) {
-  console.log(funcs[i]());
-}
+let person = new Person("Hello");
+person.constructor.sayHi();
