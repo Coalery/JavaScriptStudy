@@ -1,38 +1,34 @@
-class Rectangle {
-  constructor(width, height) {
-    console.log(this);
-    console.log(new.target);
-
-    console.log(Object.getPrototypeOf(this) === ColorRectangle.prototype);
-    console.log(this instanceof ColorRectangle);
-    console.log(this instanceof Rectangle);
-
-    this.width = width;
-    this.height = height;
+class Hello {
+  constructor(cb) {
+    this.hi = 5;
+    this.cb = cb;
+    this.cb2 = () => this.hi;
   }
 
-  getArea() {
-    return this.width * this.height;
+  hello() {
+    return this.cb();
   }
 
-  toString() {
-    return `width = ${this.width}, height = ${this.height}`;
+  hello2() {
+    return this.cb2();
   }
 }
 
-class ColorRectangle extends Rectangle {
-  constructor(width, height, color) {
-    super(width, height);
-    this.color = color;
-  }
+let hello = new Hello(function () {
+  return this.hi;
+});
+console.log(hello.hello()); // 5
+console.log(hello.hello2()); // 5
+console.log(hello.cb()); // 5
+console.log(hello.cb2()); // 5
+console.log(hello);
+console.log("");
 
-  toString() {
-    return super.toString() + `, color = ${this.color}`;
-  }
-}
-
-const colorRectangle = new ColorRectangle(2, 4, "red");
-console.log(colorRectangle);
-
-console.log(colorRectangle.getArea());
-console.log(colorRectangle.toString());
+let hello2 = new Hello(() => {
+  return this.hi;
+});
+console.log(hello2.hello()); // undefined
+console.log(hello2.hello2()); // 5
+console.log(hello2.cb()); // undefined
+console.log(hello2.cb2()); // 5
+console.log(hello2);
