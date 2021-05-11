@@ -1,9 +1,6 @@
-const fruits = ["banana", "apple", "orange", "orange", "apple"];
+const id = "doralife12@naver.com";
 
-const count = fruits.reduce((acc, cur, idx, _) => {
-  acc[cur] = acc[cur] ?? 0;
-  acc[cur]++;
-  return acc;
-}, {});
+const regExp =
+  /^[A-Za-z0-9]+([\._-]?[A-Za-z0-9])*@[A-Za-z0-9]+([\._-]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/;
 
-console.log(count);
+console.log(regExp.test(id));
